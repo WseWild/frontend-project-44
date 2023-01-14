@@ -1,0 +1,23 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/WseWild/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/WseWild/frontend-project-44/actions)",
+  "main": "index.js",
+  "type":"module",
+  "bin": {
+    "brain-games": "bin/brain-games.js"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WseWild/frontend-project-44.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WseWild/frontend-project-44/issues"
+  },
+  "homepage": "https://github.com/WseWild/frontend-project-44#readme"
+}
