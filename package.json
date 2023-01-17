@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/WseWild/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/WseWild/frontend-project-44/actions)",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "bin": {
     "brain-games": "bin/brain-games.js"
   },
@@ -19,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/WseWild/frontend-project-44/issues"
   },
-  "homepage": "https://github.com/WseWild/frontend-project-44#readme"
+  "homepage": "https://github.com/WseWild/frontend-project-44#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1"
+  }
 }
