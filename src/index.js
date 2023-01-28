@@ -20,9 +20,15 @@ export const gameConditions = (gameType) => {
     case 'even':
       console.log('Answer "yes" if the number is even, otherwise answer "no".');
       break;
+
     case 'calc':
       console.log('What is the result of the expression?');
       break;
+
+    case 'gcd':
+      console.log('Find the greatest common divisor of given numbers.');
+      break;
+
     default:
   }
 };
@@ -40,11 +46,18 @@ const getRandomOperator = () => {
   return result;
 };
 
-const getExpression = () => {
+const getExpressionForCalc = () => {
   const operator = getRandomOperator();
   const num1 = getRandomInt();
   const num2 = getRandomInt();
   const result = [num1, operator, num2];
+  return result;
+};
+
+const getExpressionForGcd = () => {
+  const num1 = getRandomInt();
+  const num2 = getRandomInt();
+  const result = [num1, num2];
   return result;
 };
 
@@ -54,7 +67,10 @@ const getQuestionValue = (gameType) => {
       return getRandomInt();
 
     case 'calc':
-      return getExpression();
+      return getExpressionForCalc();
+
+    case 'gcd':
+      return getExpressionForGcd();
 
     default: return undefined;
   }
@@ -70,11 +86,15 @@ export const question = (gameType, value) => {
       console.log(`Question: ${value.join(' ')}`);
       break;
 
+    case 'gcd':
+      console.log(`Question: ${value.join(' ')}`);
+      break;
+
     default:
   }
 };
 
-const getResultOfExpression = ([num1, operator, num2]) => {
+const getResultOfExpressionForCalc = ([num1, operator, num2]) => {
   switch (operator) {
     case '+':
       return num1 + num2;
@@ -89,12 +109,24 @@ const getResultOfExpression = ([num1, operator, num2]) => {
   }
 };
 
+const getResultOfExpressionForGcd = ([num1, num2]) => {
+  const NOD = (x, y) => {
+    if (y > x) return NOD(y, x);
+    if (!y) return x;
+    return NOD(y, x % y);
+  };
+  return NOD(num1, num2);
+};
+
 export const getUserAnswer = (gameType) => {
   switch (gameType) {
     case 'even':
       return readlineSync.question('Your answer: ');
 
     case 'calc':
+      return readlineSync.questionInt('Your answer: ');
+
+    case 'gcd':
       return readlineSync.questionInt('Your answer: ');
 
     default: return undefined;
@@ -107,7 +139,10 @@ const getCorrectAnswer = (gameType, value) => {
       return isEven(value);
 
     case 'calc':
-      return getResultOfExpression(value);
+      return getResultOfExpressionForCalc(value);
+
+    case 'gcd':
+      return getResultOfExpressionForGcd(value);
 
     default: return undefined;
   }
