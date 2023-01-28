@@ -9,3 +9,6 @@
 
 ###  brain-calc runtime example
 [![asciicast](https://asciinema.org/a/jGMyAbcnBZvIBpaBaBW4loo3R.svg)](https://asciinema.org/a/jGMyAbcnBZvIBpaBaBW4loo3R)
+
+###  brain-gcd runtime example
+[![asciicast](https://asciinema.org/a/CZECvKyLVjwCg3VbyazX7bTp7.svg)](https://asciinema.org/a/CZECvKyLVjwCg3VbyazX7bTp7)
