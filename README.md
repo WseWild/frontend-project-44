@@ -12,3 +12,6 @@
 
 ###  brain-gcd runtime example
 [![asciicast](https://asciinema.org/a/CZECvKyLVjwCg3VbyazX7bTp7.svg)](https://asciinema.org/a/CZECvKyLVjwCg3VbyazX7bTp7)
+
+###  brain-progression runtime example
+[![asciicast](https://asciinema.org/a/3yoepxQPoMaAnMhR2krVDulGN.svg)](https://asciinema.org/a/3yoepxQPoMaAnMhR2krVDulGN)

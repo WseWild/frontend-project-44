@@ -29,13 +29,15 @@ export const gameConditions = (gameType) => {
       console.log('Find the greatest common divisor of given numbers.');
       break;
 
+    case 'progression':
+      console.log('What number is missing in the progression?');
+      break;
+
     default:
   }
 };
 
-export const getRandomInt = () => {
-  const maxInt = 1;
-  const minInt = 99;
+export const getRandomInt = (minInt = 1, maxInt = 99) => {
   const result = Math.floor(Math.random() * (maxInt - minInt)) + minInt;
   return result;
 };
@@ -47,16 +49,66 @@ const getRandomOperator = () => {
 };
 
 const getExpressionForCalc = () => {
+  const minInt = 1;
+  const maxInt = 20;
+
   const operator = getRandomOperator();
-  const num1 = getRandomInt();
-  const num2 = getRandomInt();
+  const num1 = getRandomInt(minInt, maxInt);
+  const num2 = getRandomInt(minInt, maxInt);
   const result = [num1, operator, num2];
   return result;
 };
 
+const getRandomArrayIndex = (arr) => Math.floor(Math.random() * arr.length);
+
+const getArithProg = () => {
+  const firstElement = getRandomInt();
+  const difernceInt = getRandomInt();
+  const unknownElement = '..';
+
+  const minArrLength = 5;
+  const maxArrLength = 12;
+
+  const len = getRandomInt(minArrLength, maxArrLength);
+  const arr = [];
+
+  arr[0] = firstElement;
+
+  for (let i = 1; i <= len; i += 1) {
+    arr[i] = arr[i - 1] + difernceInt;
+  }
+  arr[getRandomArrayIndex(arr)] = unknownElement;
+
+  return arr;
+};
+
+const getUnknownNumOfProgression = (arr) => {
+  let difference;
+  let result;
+  const unknownElement = '..';
+
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] !== unknownElement && arr[i + 1] !== unknownElement) {
+      difference = arr[i + 1] - arr[i];
+      break;
+    }
+  }
+
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === unknownElement) {
+      result = arr[i + 1] - difference;
+    }
+  }
+
+  return result;
+};
+
 const getExpressionForGcd = () => {
-  const num1 = getRandomInt();
-  const num2 = getRandomInt();
+  const minInt = 1;
+  const maxInt = 30;
+
+  const num1 = getRandomInt(minInt, maxInt);
+  const num2 = getRandomInt(minInt, maxInt);
   const result = [num1, num2];
   return result;
 };
@@ -72,11 +124,14 @@ const getQuestionValue = (gameType) => {
     case 'gcd':
       return getExpressionForGcd();
 
+    case 'progression':
+      return getArithProg();
+
     default: return undefined;
   }
 };
 
-export const question = (gameType, value) => {
+const question = (gameType, value) => {
   switch (gameType) {
     case 'even':
       console.log(`'Question: ' ${value}`);
@@ -87,6 +142,10 @@ export const question = (gameType, value) => {
       break;
 
     case 'gcd':
+      console.log(`Question: ${value.join(' ')}`);
+      break;
+
+    case 'progression':
       console.log(`Question: ${value.join(' ')}`);
       break;
 
@@ -110,15 +169,15 @@ const getResultOfExpressionForCalc = ([num1, operator, num2]) => {
 };
 
 const getResultOfExpressionForGcd = ([num1, num2]) => {
-  const NOD = (x, y) => {
-    if (y > x) return NOD(y, x);
+  const gcd = (x, y) => {
+    if (y > x) return gcd(y, x);
     if (!y) return x;
-    return NOD(y, x % y);
+    return gcd(y, x % y);
   };
-  return NOD(num1, num2);
+  return gcd(num1, num2);
 };
 
-export const getUserAnswer = (gameType) => {
+const getUserAnswer = (gameType) => {
   switch (gameType) {
     case 'even':
       return readlineSync.question('Your answer: ');
@@ -127,6 +186,9 @@ export const getUserAnswer = (gameType) => {
       return readlineSync.questionInt('Your answer: ');
 
     case 'gcd':
+      return readlineSync.questionInt('Your answer: ');
+
+    case 'progression':
       return readlineSync.questionInt('Your answer: ');
 
     default: return undefined;
@@ -143,6 +205,9 @@ const getCorrectAnswer = (gameType, value) => {
 
     case 'gcd':
       return getResultOfExpressionForGcd(value);
+
+    case 'progression':
+      return getUnknownNumOfProgression(value);
 
     default: return undefined;
   }
