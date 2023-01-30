@@ -15,3 +15,6 @@
 
 ###  brain-progression runtime example
 [![asciicast](https://asciinema.org/a/3yoepxQPoMaAnMhR2krVDulGN.svg)](https://asciinema.org/a/3yoepxQPoMaAnMhR2krVDulGN)
+
+###  brain-prime runtime example
+[![asciicast](https://asciinema.org/a/ahbOCNWBBvbyP0FotQAlAZ9YU.svg)](https://asciinema.org/a/ahbOCNWBBvbyP0FotQAlAZ9YU)

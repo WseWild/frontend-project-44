@@ -1,4 +1,10 @@
 import readlineSync from 'readline-sync';
+import {
+  getRandomArrayIndex,
+  getRandomInt,
+  isEven,
+  isPrime,
+} from './utils/utils.js';
 
 export const ROUNDCOUNT = 3;
 
@@ -7,12 +13,6 @@ export const greetings = () => {
   const name = readlineSync.question('May I have your name?: ');
   console.log(`Hello, ${name}!`);
   return name;
-};
-
-export const isEven = (int) => {
-  if (int % 2 === 0) {
-    return 'yes';
-  } return 'no';
 };
 
 export const gameConditions = (gameType) => {
@@ -33,13 +33,11 @@ export const gameConditions = (gameType) => {
       console.log('What number is missing in the progression?');
       break;
 
+    case 'prime':
+      console.log('Answer "yes" if the number is even, otherwise answer "no".');
+      break;
     default:
   }
-};
-
-export const getRandomInt = (minInt = 1, maxInt = 99) => {
-  const result = Math.floor(Math.random() * (maxInt - minInt)) + minInt;
-  return result;
 };
 
 const getRandomOperator = () => {
@@ -58,8 +56,6 @@ const getExpressionForCalc = () => {
   const result = [num1, operator, num2];
   return result;
 };
-
-const getRandomArrayIndex = (arr) => Math.floor(Math.random() * arr.length);
 
 const getArithProg = () => {
   const firstElement = getRandomInt();
@@ -127,6 +123,9 @@ const getQuestionValue = (gameType) => {
     case 'progression':
       return getArithProg();
 
+    case 'prime':
+      return getRandomInt();
+
     default: return undefined;
   }
 };
@@ -147,6 +146,10 @@ const question = (gameType, value) => {
 
     case 'progression':
       console.log(`Question: ${value.join(' ')}`);
+      break;
+
+    case 'prime':
+      console.log(`'Question: ' ${value}`);
       break;
 
     default:
@@ -191,6 +194,9 @@ const getUserAnswer = (gameType) => {
     case 'progression':
       return readlineSync.questionInt('Your answer: ');
 
+    case 'prime':
+      return readlineSync.question('Your answer: ');
+
     default: return undefined;
   }
 };
@@ -208,6 +214,9 @@ const getCorrectAnswer = (gameType, value) => {
 
     case 'progression':
       return getUnknownNumOfProgression(value);
+
+    case 'prime':
+      return isPrime(value);
 
     default: return undefined;
   }
