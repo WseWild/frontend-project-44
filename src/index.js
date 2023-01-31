@@ -34,7 +34,7 @@ export const gameConditions = (gameType) => {
       break;
 
     case 'prime':
-      console.log('Answer "yes" if the number is even, otherwise answer "no".');
+      console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
       break;
     default:
   }
@@ -149,7 +149,7 @@ const question = (gameType, value) => {
       break;
 
     case 'prime':
-      console.log(`'Question: ' ${value}`);
+      console.log(`Question: ${value}`);
       break;
 
     default:
