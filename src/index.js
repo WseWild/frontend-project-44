@@ -133,7 +133,7 @@ const getQuestionValue = (gameType) => {
 const question = (gameType, value) => {
   switch (gameType) {
     case 'even':
-      console.log(`'Question: ' ${value}`);
+      console.log(`Question: ${value}`);
       break;
 
     case 'calc':
