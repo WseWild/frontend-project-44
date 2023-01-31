@@ -91,9 +91,10 @@ const getUnknownNumOfProgression = (arr) => {
   }
 
   for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] === unknownElement) {
+    if (arr[i] === unknownElement && i !== arr.length - 1) {
       result = arr[i + 1] - difference;
-    }
+      break;
+    } result = arr[i - 1] + difference;
   }
 
   return result;
