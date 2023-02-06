@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/WseWild/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/WseWild/frontend-project-44/actions)",
+  "description": "Учебный проект 'Игры разума' курса 'Фронтенд-разработчик разработчик' сервиса hexlet.io ",
   "main": "index.js",
   "type": "module",
   "bin": {
