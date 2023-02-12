@@ -1,15 +1,15 @@
 import {
   greetings,
-  gameConditions,
   gameFlow,
 } from '../index.js';
+import { gameConditions } from '../utils.js';
 
 const GAMETYPE = 'prime';
 
-const brainPrime = () => {
+const runBrainPrime = () => {
   const name = greetings();
   gameConditions(GAMETYPE);
   gameFlow(name, GAMETYPE);
 };
 
-export default brainPrime;
+export default runBrainPrime;

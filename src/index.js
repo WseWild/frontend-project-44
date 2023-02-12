@@ -1,10 +1,11 @@
 import readlineSync from 'readline-sync';
 import {
   getRandomArrayIndex,
-  getRandomInt,
+  getRandomNum,
   isEven,
   isPrime,
-} from './utils/utils.js';
+  getStringFormatAnswer,
+} from './utils.js';
 
 export const ROUNDCOUNT = 3;
 
@@ -15,31 +16,6 @@ export const greetings = () => {
   return name;
 };
 
-export const gameConditions = (gameType) => {
-  switch (gameType) {
-    case 'even':
-      console.log('Answer "yes" if the number is even, otherwise answer "no".');
-      break;
-
-    case 'calc':
-      console.log('What is the result of the expression?');
-      break;
-
-    case 'gcd':
-      console.log('Find the greatest common divisor of given numbers.');
-      break;
-
-    case 'progression':
-      console.log('What number is missing in the progression?');
-      break;
-
-    case 'prime':
-      console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-      break;
-    default:
-  }
-};
-
 const getRandomOperator = () => {
   const OPERATORS = ['+', '-', '*'];
   const result = OPERATORS[Math.floor(Math.random() * OPERATORS.length)];
@@ -47,25 +23,25 @@ const getRandomOperator = () => {
 };
 
 const getExpressionForCalc = () => {
-  const minInt = 1;
-  const maxInt = 20;
+  const minNum = 1;
+  const maxNum = 20;
 
   const operator = getRandomOperator();
-  const num1 = getRandomInt(minInt, maxInt);
-  const num2 = getRandomInt(minInt, maxInt);
+  const num1 = getRandomNum(minNum, maxNum);
+  const num2 = getRandomNum(minNum, maxNum);
   const result = [num1, operator, num2];
   return result;
 };
 
 const getArithProg = () => {
-  const firstElement = getRandomInt();
-  const difernceInt = getRandomInt();
+  const firstElement = getRandomNum();
+  const difernceInt = getRandomNum();
   const unknownElement = '..';
 
   const minArrLength = 5;
   const maxArrLength = 12;
 
-  const len = getRandomInt(minArrLength, maxArrLength);
+  const len = getRandomNum(minArrLength, maxArrLength);
   const arr = [];
 
   arr[0] = firstElement;
@@ -101,11 +77,11 @@ const getUnknownNumOfProgression = (arr) => {
 };
 
 const getExpressionForGcd = () => {
-  const minInt = 1;
-  const maxInt = 30;
+  const minNum = 1;
+  const maxNum = 30;
 
-  const num1 = getRandomInt(minInt, maxInt);
-  const num2 = getRandomInt(minInt, maxInt);
+  const num1 = getRandomNum(minNum, maxNum);
+  const num2 = getRandomNum(minNum, maxNum);
   const result = [num1, num2];
   return result;
 };
@@ -113,7 +89,7 @@ const getExpressionForGcd = () => {
 const getQuestionValue = (gameType) => {
   switch (gameType) {
     case 'even':
-      return getRandomInt();
+      return getRandomNum();
 
     case 'calc':
       return getExpressionForCalc();
@@ -125,9 +101,10 @@ const getQuestionValue = (gameType) => {
       return getArithProg();
 
     case 'prime':
-      return getRandomInt();
+      return getRandomNum();
 
-    default: return undefined;
+    default:
+      throw new Error(`Unknown order state: '${gameType}'!`);
   }
 };
 
@@ -154,6 +131,7 @@ const question = (gameType, value) => {
       break;
 
     default:
+      throw new Error(`Unknown order state: '${gameType}'!`);
   }
 };
 
@@ -168,7 +146,8 @@ const getResultOfExpressionForCalc = ([num1, operator, num2]) => {
     case '*':
       return num1 * num2;
 
-    default: return undefined;
+    default:
+      throw new Error(`Unknown order state: '${operator}'!`);
   }
 };
 
@@ -198,14 +177,15 @@ const getUserAnswer = (gameType) => {
     case 'prime':
       return readlineSync.question('Your answer: ');
 
-    default: return undefined;
+    default:
+      throw new Error(`Unknown order state: '${gameType}'!`);
   }
 };
 
 const getCorrectAnswer = (gameType, value) => {
   switch (gameType) {
     case 'even':
-      return isEven(value);
+      return getStringFormatAnswer(isEven(value));
 
     case 'calc':
       return getResultOfExpressionForCalc(value);
@@ -217,9 +197,10 @@ const getCorrectAnswer = (gameType, value) => {
       return getUnknownNumOfProgression(value);
 
     case 'prime':
-      return isPrime(value);
+      return getStringFormatAnswer(isPrime(value));
 
-    default: return undefined;
+    default:
+      throw new Error(`Unknown order state: '${gameType}'!`);
   }
 };
 

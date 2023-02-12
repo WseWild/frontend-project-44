@@ -1,15 +1,15 @@
 import {
   greetings,
-  gameConditions,
   gameFlow,
 } from '../index.js';
+import { gameConditions } from '../utils.js';
 
 const GAMETYPE = 'even';
 
-const brainEven = () => {
+const runBrainEven = () => {
   const name = greetings();
   gameConditions(GAMETYPE);
   gameFlow(name, GAMETYPE);
 };
 
-export default brainEven;
+export default runBrainEven;
