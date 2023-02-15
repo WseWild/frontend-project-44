@@ -1,12 +1,17 @@
-import { getUserName } from './utils.js';
+import {
+  getUserName,
+  showWelcomeMsg,
+  showUserGreeting,
+  shoeGameCondition,
+} from './utils.js';
 
 export const ROUNDCOUNT = 3;
 
 export const runGame = (gameCondition, gameData) => {
-  console.log('Welcome to the Brain Games!');
+  showWelcomeMsg();
   const userName = getUserName();
-  console.log(`Hello, ${userName}!`);
-  console.log(gameCondition);
+  showUserGreeting(userName);
+  shoeGameCondition(gameCondition);
 
   for (let curRound = 0; curRound < ROUNDCOUNT; curRound += 1) {
     const [userAnswer, correctAnswer] = gameData();
