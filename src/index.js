@@ -1,16 +1,10 @@
-import {
-  getUserName,
-  showWelcomeMsg,
-  showUserGreeting,
-  shoeGameCondition,
-} from './utils.js';
+import { shoeGameCondition } from './utils.js';
+import runBrainGames from './cli.js';
 
 export const ROUNDCOUNT = 3;
 
 export const runGame = (gameCondition, gameData) => {
-  showWelcomeMsg();
-  const userName = getUserName();
-  showUserGreeting(userName);
+  const userName = runBrainGames();
   shoeGameCondition(gameCondition);
 
   for (let curRound = 0; curRound < ROUNDCOUNT; curRound += 1) {
