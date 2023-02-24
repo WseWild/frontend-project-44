@@ -1,12 +1,10 @@
-import { runGame } from '../index.js';
+import runGame from '../index.js';
 import {
-  getGameCondition,
   getRandomNum,
-  getUserAnswer,
   getStringFormatAnswer,
 } from '../utils.js';
 
-const GAMETYPE = 'prime';
+const gameCondition = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const isPrime = (num) => {
   for (let i = 2; i < num; i += 1) {
@@ -17,19 +15,13 @@ const isPrime = (num) => {
   return true;
 };
 
-const getGameData = (gameType) => {
+const getRoundData = () => {
   const questionValue = getRandomNum();
-  const userAnswer = getUserAnswer(gameType, questionValue);
   const correctAnswer = getStringFormatAnswer(isPrime(questionValue));
-  const arr = [userAnswer, correctAnswer];
-  return arr;
+
+  return [questionValue, correctAnswer];
 };
 
-const gameCondition = getGameCondition(GAMETYPE);
-const gameData = () => getGameData(GAMETYPE);
-
-const runBrainPrime = () => {
-  runGame(gameCondition, gameData);
-};
+const runBrainPrime = () => runGame(gameCondition, getRoundData);
 
 export default runBrainPrime;

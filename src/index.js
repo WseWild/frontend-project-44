@@ -1,22 +1,28 @@
-import { shoeGameCondition } from './utils.js';
-import runBrainGames from './cli.js';
+import readlineSync from 'readline-sync';
+import { showGameCondition } from './utils.js';
 
-export const ROUNDCOUNT = 3;
+const ROUNDS_COUNT = 3;
 
-export const runGame = (gameCondition, gameData) => {
-  const userName = runBrainGames();
-  shoeGameCondition(gameCondition);
+const runGame = (gameCondition, generateRoundData) => {
+  console.log('Welcome to the Brain Games!');
+  const userName = readlineSync.question('May I have your name?: ');
+  console.log(`Hello, ${userName}!`);
+  showGameCondition(gameCondition);
 
-  for (let curRound = 0; curRound < ROUNDCOUNT; curRound += 1) {
-    const [userAnswer, correctAnswer] = gameData();
+  for (let currentRound = 0; currentRound < ROUNDS_COUNT; currentRound += 1) {
+    const [questionValue, correctAnswer] = generateRoundData();
+    console.log(`Question: ${questionValue}`);
+    const userAnswer = readlineSync.question('Your answer: ');
 
-    if (userAnswer === correctAnswer) {
+    if (userAnswer === correctAnswer && currentRound < ROUNDS_COUNT) {
       console.log('Correct!');
-      if (curRound === ROUNDCOUNT - 1) console.log(`Congratulations, ${userName}!`);
     } else {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'
       Let's try again, ${userName}!`);
       return;
     }
   }
+  console.log(`Congratulations, ${userName}!`);
 };
+
+export default runGame;

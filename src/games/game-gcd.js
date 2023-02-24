@@ -1,11 +1,7 @@
-import { runGame } from '../index.js';
-import {
-  getGameCondition,
-  getRandomNum,
-  getUserAnswer,
-} from '../utils.js';
+import runGame from '../index.js';
+import { getRandomNum } from '../utils.js';
 
-const GAMETYPE = 'gcd';
+const gameCondition = 'Find the greatest common divisor of given numbers.';
 
 const getResultOfExpressionForGcd = ([num1, num2]) => {
   const gcd = (x, y) => {
@@ -19,26 +15,18 @@ const getResultOfExpressionForGcd = ([num1, num2]) => {
 const getExpressionForGcd = () => {
   const minNum = 1;
   const maxNum = 30;
-
   const num1 = getRandomNum(minNum, maxNum);
   const num2 = getRandomNum(minNum, maxNum);
-  const result = [num1, num2];
-  return result;
+
+  return [num1, num2];
 };
 
-const getGameData = (gameType) => {
+const getRoundData = () => {
   const questionValue = getExpressionForGcd();
-  const userAnswer = getUserAnswer(gameType, questionValue);
-  const correctAnswer = getResultOfExpressionForGcd(questionValue);
-  const arr = [userAnswer, correctAnswer];
-  return arr;
+  const correctAnswer = String(getResultOfExpressionForGcd(questionValue));
+  return [questionValue.join(' '), correctAnswer];
 };
 
-const gameCondition = getGameCondition(GAMETYPE);
-const gameData = () => getGameData(GAMETYPE);
-
-const runBrainGcd = () => {
-  runGame(gameCondition, gameData);
-};
+const runBrainGcd = () => runGame(gameCondition, getRoundData);
 
 export default runBrainGcd;

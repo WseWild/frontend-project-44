@@ -1,12 +1,10 @@
-import { runGame } from '../index.js';
+import runGame from '../index.js';
 import {
-  getGameCondition,
   getRandomNum,
-  getUserAnswer,
   getStringFormatAnswer,
 } from '../utils.js';
 
-const GAMETYPE = 'even';
+const gameCondition = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 export const isEven = (num) => {
   if (num % 2 === 0) {
@@ -14,19 +12,12 @@ export const isEven = (num) => {
   } return false;
 };
 
-const getGameData = (gameType) => {
+const getRondData = () => {
   const questionValue = getRandomNum();
-  const userAnswer = getUserAnswer(gameType, questionValue);
   const correctAnswer = getStringFormatAnswer(isEven(questionValue));
-  const arr = [userAnswer, correctAnswer];
-  return arr;
+  return [questionValue, correctAnswer];
 };
 
-const gameCondition = getGameCondition(GAMETYPE);
-const gameData = () => getGameData(GAMETYPE);
-
-const runBrainEven = () => {
-  runGame(gameCondition, gameData);
-};
+const runBrainEven = () => runGame(gameCondition, getRondData);
 
 export default runBrainEven;

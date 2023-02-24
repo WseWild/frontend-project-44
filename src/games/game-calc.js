@@ -1,16 +1,12 @@
-import { runGame } from '../index.js';
-import {
-  getGameCondition,
-  getRandomNum,
-  getUserAnswer,
-} from '../utils.js';
+import runGame from '../index.js';
+import { getRandomNum, getRandomArrayIndex } from '../utils.js';
 
-const GAMETYPE = 'calc';
+const gameCondition = 'What is the result of the expression?';
 
 export const getRandomOperator = () => {
-  const OPERATORS = ['+', '-', '*'];
-  const result = OPERATORS[Math.floor(Math.random() * OPERATORS.length)];
-  return result;
+  const operators = ['+', '-', '*'];
+  const operatorIndex = getRandomArrayIndex(operators);
+  return operators[operatorIndex];
 };
 
 const getResultOfExpressionForCalc = ([num1, operator, num2]) => {
@@ -32,27 +28,20 @@ const getResultOfExpressionForCalc = ([num1, operator, num2]) => {
 const getExpressionForCalc = () => {
   const minNum = 1;
   const maxNum = 20;
-
   const operator = getRandomOperator();
   const num1 = getRandomNum(minNum, maxNum);
   const num2 = getRandomNum(minNum, maxNum);
-  const result = [num1, operator, num2];
-  return result;
+
+  return [num1, operator, num2];
 };
 
-const getGameData = (gameType) => {
+const getRoundData = () => {
   const questionValue = getExpressionForCalc();
-  const userAnswer = getUserAnswer(gameType, questionValue);
-  const correctAnswer = getResultOfExpressionForCalc(questionValue);
-  const arr = [userAnswer, correctAnswer];
-  return arr;
+  const correctAnswer = String(getResultOfExpressionForCalc(questionValue));
+
+  return [questionValue.join(' '), correctAnswer];
 };
 
-const gameCondition = getGameCondition(GAMETYPE);
-const gameData = () => getGameData(GAMETYPE);
-
-const runBrainCalc = () => {
-  runGame(gameCondition, gameData);
-};
+const runBrainCalc = () => runGame(gameCondition, getRoundData);
 
 export default runBrainCalc;

@@ -1,12 +1,10 @@
-import { runGame } from '../index.js';
+import runGame from '../index.js';
 import {
-  getGameCondition,
   getRandomNum,
-  getUserAnswer,
   getRandomArrayIndex,
 } from '../utils.js';
 
-const GAMETYPE = 'progression';
+const gameCondition = 'What number is missing in the progression?';
 
 const getArithProg = () => {
   const firstElement = getRandomNum();
@@ -51,19 +49,12 @@ const getUnknownNumOfProgression = (arr) => {
   return result;
 };
 
-const getGameData = (gameType) => {
+const getRoundData = () => {
   const questionValue = getArithProg();
-  const userAnswer = getUserAnswer(gameType, questionValue);
-  const correctAnswer = getUnknownNumOfProgression(questionValue);
-  const arr = [userAnswer, correctAnswer];
-  return arr;
+  const correctAnswer = String(getUnknownNumOfProgression(questionValue));
+  return [questionValue.join(' '), correctAnswer];
 };
 
-const gameCondition = getGameCondition(GAMETYPE);
-const gameData = () => getGameData(GAMETYPE);
-
-const runBrainProgression = () => {
-  runGame(gameCondition, gameData);
-};
+const runBrainProgression = () => runGame(gameCondition, getRoundData);
 
 export default runBrainProgression;
