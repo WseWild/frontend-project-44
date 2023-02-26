@@ -1,5 +1,4 @@
 import readlineSync from 'readline-sync';
-import { showGameCondition } from './utils.js';
 
 const ROUNDS_COUNT = 3;
 
@@ -7,7 +6,7 @@ const runGame = (gameCondition, generateRoundData) => {
   console.log('Welcome to the Brain Games!');
   const userName = readlineSync.question('May I have your name?: ');
   console.log(`Hello, ${userName}!`);
-  showGameCondition(gameCondition);
+  console.log(gameCondition);
 
   for (let currentRound = 0; currentRound < ROUNDS_COUNT; currentRound += 1) {
     const [questionValue, correctAnswer] = generateRoundData();

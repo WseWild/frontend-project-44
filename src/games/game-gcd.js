@@ -3,7 +3,7 @@ import { getRandomNum } from '../utils.js';
 
 const gameCondition = 'Find the greatest common divisor of given numbers.';
 
-const getResultOfExpressionForGcd = ([num1, num2]) => {
+const getGCD = ([num1, num2]) => {
   const gcd = (x, y) => {
     if (y > x) return gcd(y, x);
     if (!y) return x;
@@ -12,7 +12,7 @@ const getResultOfExpressionForGcd = ([num1, num2]) => {
   return gcd(num1, num2);
 };
 
-const getExpressionForGcd = () => {
+const getExpressionForGCD = () => {
   const minNum = 1;
   const maxNum = 30;
   const num1 = getRandomNum(minNum, maxNum);
@@ -22,8 +22,8 @@ const getExpressionForGcd = () => {
 };
 
 const getRoundData = () => {
-  const questionValue = getExpressionForGcd();
-  const correctAnswer = String(getResultOfExpressionForGcd(questionValue));
+  const questionValue = getExpressionForGCD();
+  const correctAnswer = String(getGCD(questionValue));
   return [questionValue.join(' '), correctAnswer];
 };
 
