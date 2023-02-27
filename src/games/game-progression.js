@@ -1,8 +1,5 @@
 import runGame from '../index.js';
-import {
-  getRandomNum,
-  getRandomArrayIndex,
-} from '../utils.js';
+import { getRandomNum } from '../utils.js';
 
 const gameCondition = 'What number is missing in the progression?';
 const unknownElement = '..';
@@ -25,20 +22,13 @@ const getArithProg = () => {
   return arr;
 };
 
-const getDifference = (arr) => arr[1] - arr[0];
-
-// eslint-disable-next-line max-len
-const getUnknownNumOfProgression = (arr, difference, indexUnknownElement) => arr[indexUnknownElement + 1] - difference;
-
 const getRoundData = () => {
   const progressionArray = getArithProg();
-  const difference = getDifference(progressionArray);
-  const indexUnknownElement = getRandomArrayIndex(progressionArray);
+  const indexUnknownElement = getRandomNum(0, progressionArray.length - 1);
+  const correctAnswer = String(progressionArray[indexUnknownElement]);
   progressionArray[indexUnknownElement] = unknownElement;
-  const questionValue = progressionArray;
-  // eslint-disable-next-line max-len
-  const correctAnswer = String(getUnknownNumOfProgression(questionValue, difference, indexUnknownElement));
-  return [questionValue.join(' '), correctAnswer];
+
+  return [progressionArray.join(' '), correctAnswer];
 };
 
 const runBrainProgression = () => runGame(gameCondition, getRoundData);

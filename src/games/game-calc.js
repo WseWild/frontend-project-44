@@ -1,11 +1,11 @@
 import runGame from '../index.js';
-import { getRandomNum, getRandomArrayIndex } from '../utils.js';
+import { getRandomNum } from '../utils.js';
 
 const gameCondition = 'What is the result of the expression?';
 
 export const getRandomOperator = () => {
   const operators = ['+', '-', '*'];
-  const operatorIndex = getRandomArrayIndex(operators);
+  const operatorIndex = getRandomNum(0, operators.length - 1);
   return operators[operatorIndex];
 };
 
